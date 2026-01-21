@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+    <div class="ambient">
+        <span class="orb orb-one"></span>
+        <span class="orb orb-two"></span>
+        <span class="orb orb-three"></span>
+    </div>
+
+    <header class="topbar">
+        <div class="brand">
+            <div class="logo">WS</div>
+            <div>
+                <div class="eyebrow">Admin Dashboard</div>
+                <h1>WebSocket Control Dashboard</h1>
+                <p class="subtitle">Live visibility for traffic, clients, and routing.</p>
+            </div>
+        </div>
+        <div class="status-pill" id="status-pill">
+            <span class="status-dot" id="status-dot"></span>
+            <span class="status-text" id="status-text">connecting</span>
+        </div>
+    </header>
+
+    <section class="stats-row">
+        <div class="stat-card">
+            <div class="stat-label">Connected clients</div>
+            <div class="stat-value mono" id="stat-clients">0</div>
+            <div class="stat-meta" id="stat-clients-meta">0 online</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Messages observed</div>
+            <div class="stat-value mono" id="stat-messages">0</div>
+            <div class="stat-meta">Live stream</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Active relations</div>
+            <div class="stat-value mono" id="stat-relations">0</div>
+            <div class="stat-meta">Pairs with traffic</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Last activity</div>
+            <div class="stat-value mono" id="stat-last">--:--:--</div>
+            <div class="stat-meta">Server time</div>
+        </div>
+    </section>
+
+    <main class="dashboard-grid">
+        <section class="panel feed">
+            <div class="panel-header">
+                <div>
+                    <h2>Traffic Feed</h2>
+                    <p>Messages routed between users and the server.</p>
+                </div>
+                <div class="panel-actions">
+                    <button class="btn ghost" id="clear-feed">Clear</button>
+                </div>
+            </div>
+            <ul id="messages-list" class="messages"></ul>
+        </section>
+
+        <section class="panel clients">
+            <div class="panel-header">
+                <div>
+                    <h2>Connected Clients</h2>
+                    <p><span id="clients-count">0</span> online</p>
+                </div>
+            </div>
+            <ul id="clients-list" class="clients-list"></ul>
+            <div class="panel-footer">
+                <span class="mini-label">Last update</span>
+                <span class="mono" id="clients-updated">--:--:--</span>
+            </div>
+        </section>
+
+        <section class="panel graph">
+            <div class="panel-header">
+                <div>
+                    <h2>Relations Graph</h2>
+                    <p>Live topology of the server and client links.</p>
+                </div>
+                <div class="legend">
+                    <span class="legend-item"><span class="dot server"></span>Server</span>
+                    <span class="legend-item"><span class="dot client"></span>Client</span>
+                    <span class="legend-item"><span class="line traffic"></span>Traffic</span>
+                </div>
+            </div>
+            <div class="graph-wrap">
+                <svg id="graph" aria-label="Relations graph"></svg>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+*.venv
+venv/
+ENV/
+env/
+*.sqlite3
+*.db
+
+# Flask
+instance/
+*.log
+
+# VSCode
+.vscode/
+
+# Mac
+.DS_Store
+
+# Node / JS (si tu utilises npm ou d3.js)
+node_modules/
+dist/
+
+# IDE / editors
+*.idea/
+*.sublime-project
+*.sublime-workspace
